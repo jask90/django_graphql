@@ -11,13 +11,15 @@ This will create the images and raise the corresponding containers, if we want t
 # Execute tests
 
 Once inside the container we can launch the unit tests with the following command:
-> /opt/django_graphql/django_graphql/manage.py test user
+> python3 /opt/django_graphql/django_graphql/manage.py test user
 
-> /opt/django_graphql/django_graphql/manage.py test social
+> python3 /opt/django_graphql/django_graphql/manage.py test social
 
 This executes the tests located in user and social apps.
 
 # Other details
+
+The web will run at http://localhost:8000/
 
 When you create the containers, a series of fixtures will be automatically loaded with the minimum data of users, Ideas and Follows. This is a minimum information to be able to test all the features of the project as soon as possible.
 
