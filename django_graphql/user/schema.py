@@ -1,5 +1,6 @@
 import graphene
 from django.contrib.auth.models import User
+from django_graphql.decorators import graphql_login_required
 from graphql import GraphQLError
 from graphql_auth import mutations
 from graphql_auth.schema import MeQuery
@@ -14,7 +15,7 @@ class RegisterUser(mutations.Register):
     def mutate(cls, *args, **kwargs):
         try:
             email = kwargs.get("email")
-    
+
             res = super().mutate(*args, **kwargs)
             user = User.objects.filter(email=email).first()
             if user:
@@ -35,14 +36,15 @@ class AuthMutation(graphene.ObjectType):
 
 class Query(AuthMutation, graphene.ObjectType):
     viewer = graphene.Field(UserType)
-    search_users = graphene.List(UserType, username=graphene.String(required=True))
+    search_users = graphene.List(
+        UserType, username=graphene.String(required=True))
 
+    @graphql_login_required
     def resolve_viewer(self, info, **kwargs):
         return info.context.user
 
+    @graphql_login_required
     def resolve_search_users(self, info, username):
-        if not info.context.user or info.context.user.is_anonymous:
-            return GraphQLError("You must be logged in")
 
         if not username:
             return GraphQLError("Invalid username")

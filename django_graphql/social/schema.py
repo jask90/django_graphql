@@ -2,6 +2,7 @@ import graphene
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Q
+from django_graphql.decorators import graphql_login_required
 from graphql import GraphQLError
 from graphql_auth import mutations
 from user.types import UserType
@@ -20,10 +21,8 @@ class CreateIdea(graphene.Mutation):
         visibility = graphene.String(required=True)
 
     @staticmethod
+    @graphql_login_required
     def mutate(root, info, **kwargs):
-        if not info.context.user or info.context.user.is_anonymous:
-            return CreateIdea(idea=None, errors="User not found", success=False)
-
         text = kwargs.get('text', None)
         visibility = kwargs.get('visibility', None)
 
@@ -62,10 +61,8 @@ class UpdateIdeaVisibility(graphene.Mutation):
         visibility = graphene.String(required=True)
 
     @staticmethod
+    @graphql_login_required
     def mutate(root, info, **kwargs):
-        if not info.context.user or info.context.user.is_anonymous:
-            return UpdateIdeaVisibility(idea=None, errors="User not found", success=False)
-
         idea_id = kwargs.get('id')
         visibility = kwargs.get('visibility')
 
@@ -97,10 +94,8 @@ class DeleteIdea(graphene.Mutation):
         id = graphene.ID(required=True)
 
     @staticmethod
+    @graphql_login_required
     def mutate(root, info, **kwargs):
-        if not info.context.user or info.context.user.is_anonymous:
-            return DeleteIdea(idea=None, errors="You must be logged in", success=False)
-
         idea_id = kwargs.get('id')
 
         try:
@@ -124,10 +119,8 @@ class FollowUser(graphene.Mutation):
         email = graphene.String(required=True)
 
     @staticmethod
+    @graphql_login_required
     def mutate(root, info, **kwargs):
-        if not info.context.user or info.context.user.is_anonymous:
-            return FollowUser(follow=None, errors="You must be logged in", success=False)
-
         email = kwargs.get('email', None)
         if not email:
             return FollowUser(follow=None, errors="Invalid email", success=False)
@@ -136,7 +129,7 @@ class FollowUser(graphene.Mutation):
             user = User.objects.get(email=email)
         except:
             return FollowUser(follow=None, errors="User not found", success=False)
-        
+
         if user == info.context.user:
             return FollowUser(follow=None, errors="You cant follow yourself", success=False)
 
@@ -162,6 +155,7 @@ class ChangeFollowStatus(graphene.Mutation):
         action = graphene.String(required=True)
 
     @staticmethod
+    @graphql_login_required
     def mutate(root, info, **kwargs):
         if not info.context.user or info.context.user.is_anonymous:
             return ChangeFollowStatus(follow=None, errors="You must be logged in", success=False)
@@ -170,7 +164,8 @@ class ChangeFollowStatus(graphene.Mutation):
         action = kwargs.get('action', None)
 
         try:
-            follow_instance = Follow.objects.get(id=follow_id, user=info.context.user, status='pending')
+            follow_instance = Follow.objects.get(
+                id=follow_id, user=info.context.user, status='pending')
         except:
             return ChangeFollowStatus(follow=None, errors="Follow request not found", success=False)
 
@@ -200,10 +195,8 @@ class UnfollowUser(graphene.Mutation):
         email = graphene.String(required=True)
 
     @staticmethod
+    @graphql_login_required
     def mutate(root, info, **kwargs):
-        if not info.context.user or info.context.user.is_anonymous:
-            return UnfollowUser(errors="You must be logged in", success=False)
-
         email = kwargs.get('email', None)
         if not email:
             return UnfollowUser(errors="Invalid email", success=False)
@@ -234,10 +227,8 @@ class DeleteFollower(graphene.Mutation):
         email = graphene.String(required=True)
 
     @staticmethod
+    @graphql_login_required
     def mutate(root, info, **kwargs):
-        if not info.context.user or info.context.user.is_anonymous:
-            return DeleteFollower(errors="You must be logged in", success=False)
-
         email = kwargs.get('email', None)
         if not email:
             return DeleteFollower(errors="Invalid email", success=False)
@@ -265,47 +256,44 @@ class Query(graphene.ObjectType):
     list_follow_requests = graphene.List(FollowType)
     list_followed = graphene.List(UserType)
     list_followers = graphene.List(UserType)
-    list_user_ideas = graphene.List(IdeaType, email=graphene.String(required=True))
+    list_user_ideas = graphene.List(
+        IdeaType, email=graphene.String(required=True))
     timeline = graphene.List(IdeaType)
 
+    @graphql_login_required
     def resolve_list_own_ideas(self, info, **kwargs):
-        if not info.context.user or info.context.user.is_anonymous:
-            return GraphQLError("You must be logged in")
-
-        ideas = Idea.objects.filter(user=info.context.user).order_by('-created')
+        ideas = Idea.objects.filter(
+            user=info.context.user).order_by('-created')
 
         return ideas
 
+    @graphql_login_required
     def resolve_list_follow_requests(self, info, **kwargs):
-        if not info.context.user or info.context.user.is_anonymous:
-            return GraphQLError("You must be logged in")
-
-        follow = Follow.objects.filter(user=info.context.user, status='pending').order_by('-created')
+        follow = Follow.objects.filter(
+            user=info.context.user, status='pending').order_by('-created')
 
         return follow
 
+    @graphql_login_required
     def resolve_list_followed(self, info, **kwargs):
-        if not info.context.user or info.context.user.is_anonymous:
-            return GraphQLError("You must be logged in")
-
-        users_ids = Follow.objects.filter(follower=info.context.user, status='accepted').values_list('user__id', flat=True)
-        users = User.objects.filter(id__in=users_ids).distinct().order_by('username')
+        users_ids = Follow.objects.filter(
+            follower=info.context.user, status='accepted').values_list('user__id', flat=True)
+        users = User.objects.filter(
+            id__in=users_ids).distinct().order_by('username')
 
         return users
 
+    @graphql_login_required
     def resolve_list_followers(self, info, **kwargs):
-        if not info.context.user or info.context.user.is_anonymous:
-            return GraphQLError("You must be logged in")
-
-        followers_ids = Follow.objects.filter(user=info.context.user, status='accepted').values_list('follower__id', flat=True)
-        users = User.objects.filter(id__in=followers_ids).distinct().order_by('username')
+        followers_ids = Follow.objects.filter(
+            user=info.context.user, status='accepted').values_list('follower__id', flat=True)
+        users = User.objects.filter(
+            id__in=followers_ids).distinct().order_by('username')
 
         return users
 
+    @graphql_login_required
     def resolve_list_user_ideas(self, info, email):
-        if not info.context.user or info.context.user.is_anonymous:
-            return GraphQLError("You must be logged in")
-
         if not email:
             return GraphQLError("Invalid email")
 
@@ -314,22 +302,23 @@ class Query(graphene.ObjectType):
         except:
             return GraphQLError("User not found")
 
-        visibilities = ['public',]
+        visibilities = ['public', ]
         if Follow.objects.filter(user=user, follower=info.context.user, status='accepted').exists():
             visibilities.append('protected')
 
-        ideas = Idea.objects.filter(user=user, visibility__in=visibilities).order_by('-created')
+        ideas = Idea.objects.filter(
+            user=user, visibility__in=visibilities).order_by('-created')
 
         return ideas
 
+    @graphql_login_required
     def resolve_timeline(self, info, **kwargs):
-        if not info.context.user or info.context.user.is_anonymous:
-            return GraphQLError("You must be logged in")
-
-        users_i_follow = Follow.objects.filter(follower=info.context.user, status='accepted').values_list('user__id', flat=True)
+        users_i_follow = Follow.objects.filter(
+            follower=info.context.user, status='accepted').values_list('user__id', flat=True)
 
         visibilities = ['public', 'protected']
-        ideas = Idea.objects.filter(Q(user=info.context.user) | (Q(user__id__in=users_i_follow) & Q(visibility__in=visibilities))).order_by('-created')
+        ideas = Idea.objects.filter(Q(user=info.context.user) | (
+            Q(user__id__in=users_i_follow) & Q(visibility__in=visibilities))).order_by('-created')
 
         return ideas
 
