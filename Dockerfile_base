@@ -1,0 +1,16 @@
+FROM ubuntu:20.04
+ARG DEBIAN_FRONTEND=noninteractive
+
+# Copy the file from your host to your current location
+COPY . /tmp/ 
+WORKDIR /tmp/
+
+# set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+# Install apt packages and add user
+RUN groupadd -r ubuntu && useradd --no-log-init -r -g ubuntu ubuntu && apt-get update && apt-get install --no-install-recommends -q -y $(cat /tmp/requirements_apt.txt) && rm -rf /var/lib/apt/lists/*
+
+# Install Python3 libraries
+RUN  /usr/bin/pip3 install -r /tmp/requirements.txt

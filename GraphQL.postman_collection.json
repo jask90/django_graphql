@@ -1,0 +1,826 @@
+{
+	"info": {
+		"_postman_id": "69c159aa-ac95-48f8-8771-79c35da6bdc1",
+		"name": "GraphQL",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "viewer",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/graphql",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImRhbmkzIiwiZXhwIjoxNjQzNDc3NzMzLCJvcmlnSWF0IjoxNjQzNDc3NDMzfQ.JWASiQOr2bnZcInT5oK91eZTKQ88hv4O57GcDEYSBeM",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "query {\n  viewer{\n    id\n    username\n  }\n }"
+				},
+				"url": {
+					"raw": "http://localhost:8000/graphql/?Content-Type=application/graphql&Authorization=Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImRhbmkzIiwiZXhwIjoxNjQzNDc3NzMzLCJvcmlnSWF0IjoxNjQzNDc3NDMzfQ.JWASiQOr2bnZcInT5oK91eZTKQ88hv4O57GcDEYSBeM",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"graphql",
+						""
+					],
+					"query": [
+						{
+							"key": "Content-Type",
+							"value": "application/graphql"
+						},
+						{
+							"key": "Authorization",
+							"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImRhbmkzIiwiZXhwIjoxNjQzNDc3NzMzLCJvcmlnSWF0IjoxNjQzNDc3NDMzfQ.JWASiQOr2bnZcInT5oK91eZTKQ88hv4O57GcDEYSBeM"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/graphql",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImRhbmkzIiwiZXhwIjoxNjQzNDc3NjQ2LCJvcmlnSWF0IjoxNjQzNDc3MzQ2fQ.ukXlE1px0gQMsD8UeyDNvhMQTPzWaEMGpr0niFG8DNA",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "mutation {\n  register(\n    username: \"dani6\",\n    password1: \"aTzQrDP84D\",\n    password2: \"aTzQrDP84D\",\n    email: \"dani6@email.net\",\n  ){\n    success\n    errors\n    token\n  }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/graphql/?Content-Type=application/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"graphql",
+						""
+					],
+					"query": [
+						{
+							"key": "Content-Type",
+							"value": "application/graphql"
+						},
+						{
+							"key": "Authorization",
+							"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImRhbmkyIiwiZXhwIjoxNjQzNDcwOTYzLCJvcmlnSWF0IjoxNjQzNDcwNjYzfQ.QxFz7tBk-SqMH4RH9fxWAHfJLtQyfPAE2uSjVn69Nx4",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/graphql",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImRhbmkzIiwiZXhwIjoxNjQzNDc3NjQ2LCJvcmlnSWF0IjoxNjQzNDc3MzQ2fQ.ukXlE1px0gQMsD8UeyDNvhMQTPzWaEMGpr0niFG8DNA",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "mutation {\n  tokenAuth(\n    password: \"aTzQrDP84D\",\n    email: \"dani3@email.net\",\n  ){\n    success\n    errors\n    token\n    user{\n      id\n      verified\n    }\n  }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/graphql/?Content-Type=application/graphql&Authorization=Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImRhbmkzIiwiZXhwIjoxNjQzNzM3MzA0LCJvcmlnSWF0IjoxNjQzNzM3MDA0fQ.yClLlHotJsMeatjPJwwPU1HqE-wXuzFQZN-AY_qAhG8",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"graphql",
+						""
+					],
+					"query": [
+						{
+							"key": "Content-Type",
+							"value": "application/graphql"
+						},
+						{
+							"key": "Authorization",
+							"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImRhbmkzIiwiZXhwIjoxNjQzNzM3MzA0LCJvcmlnSWF0IjoxNjQzNzM3MDA0fQ.yClLlHotJsMeatjPJwwPU1HqE-wXuzFQZN-AY_qAhG8"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Change User Password",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/graphql",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImRhbmk0IiwiZXhwIjoxNjQzNDgwOTkwLCJvcmlnSWF0IjoxNjQzNDgwNjkwfQ.wYwfA8BOyWi469YbtDDq0rkJVfNQl_hn5OFM-nB6N1U",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "mutation {\n passwordChange(\n    oldPassword: \"aTzQrDP84D\",\n    newPassword1: \"aTzQrDP84D4\",\n    newPassword2: \"aTzQrDP84D4\"\n  ) {\n    success,\n    errors,\n    token\n  }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/graphql/?Content-Type=application/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"graphql",
+						""
+					],
+					"query": [
+						{
+							"key": "Content-Type",
+							"value": "application/graphql"
+						},
+						{
+							"key": "Authorization",
+							"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImRhbmkyIiwiZXhwIjoxNjQzNDcwOTYzLCJvcmlnSWF0IjoxNjQzNDcwNjYzfQ.QxFz7tBk-SqMH4RH9fxWAHfJLtQyfPAE2uSjVn69Nx4",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Idea",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/graphql",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImRhbmk0IiwiZXhwIjoxNjQzNTU2NjQ3LCJvcmlnSWF0IjoxNjQzNTU2MzQ3fQ.pKHHh1hk8ORkCqYYGqdQxOZVLKsRxdslgTiCrsfuFGM",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "mutation {\n  createIdea(\n        text: \"Otro texto cualquiera, pero quizás demasiado grande para estar en una idea, este será su límite??. Otro texto cualquiera, pero quizás demasiado grande\",\n        visibility: \"protected\",\n    ){\n    success\n    errors\n    idea{\n        id\n    }\n  }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/graphql/?Content-Type=application/graphql&Authorization=Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImRhbmkyIiwiZXhwIjoxNjQzNDcwOTYzLCJvcmlnSWF0IjoxNjQzNDcwNjYzfQ.QxFz7tBk-SqMH4RH9fxWAHfJLtQyfPAE2uSjVn69Nx4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"graphql",
+						""
+					],
+					"query": [
+						{
+							"key": "Content-Type",
+							"value": "application/graphql"
+						},
+						{
+							"key": "Authorization",
+							"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImRhbmkyIiwiZXhwIjoxNjQzNDcwOTYzLCJvcmlnSWF0IjoxNjQzNDcwNjYzfQ.QxFz7tBk-SqMH4RH9fxWAHfJLtQyfPAE2uSjVn69Nx4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Idea Visibility",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/graphql",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImRhbmk0IiwiZXhwIjoxNjQzNTM2NjAwLCJvcmlnSWF0IjoxNjQzNTM2MzAwfQ.ckl1KYY5BWVhBD00SxGzcLp-igcJoj_aRC8HQLD3AKA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "mutation {\n  updateIdeaVisibility(\n        id: 8,\n        visibility: \"public\",\n    ){\n    success\n    errors\n    idea{\n        id\n        visibility\n    }\n  }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/graphql/?Content-Type=application/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"graphql",
+						""
+					],
+					"query": [
+						{
+							"key": "Content-Type",
+							"value": "application/graphql"
+						},
+						{
+							"key": "Authorization",
+							"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImRhbmkyIiwiZXhwIjoxNjQzNDcwOTYzLCJvcmlnSWF0IjoxNjQzNDcwNjYzfQ.QxFz7tBk-SqMH4RH9fxWAHfJLtQyfPAE2uSjVn69Nx4",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List own Ideas",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/graphql",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImRhbmk0IiwiZXhwIjoxNjQzNjUyNjEwLCJvcmlnSWF0IjoxNjQzNjUyMzEwfQ.iIQ_3ThQpx6e-5cp_FWq5KOSuIWszqGnrekLW7m4xVE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "query {\n  ownIdeas{\n      id\n      user{\n          username\n      }\n      text\n      created\n  }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/graphql/?Content-Type=application/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"graphql",
+						""
+					],
+					"query": [
+						{
+							"key": "Content-Type",
+							"value": "application/graphql"
+						},
+						{
+							"key": "Authorization",
+							"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImRhbmkyIiwiZXhwIjoxNjQzNDcwOTYzLCJvcmlnSWF0IjoxNjQzNDcwNjYzfQ.QxFz7tBk-SqMH4RH9fxWAHfJLtQyfPAE2uSjVn69Nx4",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Idea",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/graphql",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImRhbmk0IiwiZXhwIjoxNjQzNjUyNjEwLCJvcmlnSWF0IjoxNjQzNjUyMzEwfQ.iIQ_3ThQpx6e-5cp_FWq5KOSuIWszqGnrekLW7m4xVE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "mutation {\n  deleteIdea(\n        id: 9\n    ){\n    success\n    errors\n    idea{\n        text\n        user{\n            username\n        }\n    }\n  }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/graphql/?Content-Type=application/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"graphql",
+						""
+					],
+					"query": [
+						{
+							"key": "Content-Type",
+							"value": "application/graphql"
+						},
+						{
+							"key": "Authorization",
+							"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImRhbmkyIiwiZXhwIjoxNjQzNDcwOTYzLCJvcmlnSWF0IjoxNjQzNDcwNjYzfQ.QxFz7tBk-SqMH4RH9fxWAHfJLtQyfPAE2uSjVn69Nx4",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Follow user",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/graphql",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImRhbmk0IiwiZXhwIjoxNjQzODI1MjQwLCJvcmlnSWF0IjoxNjQzODI0OTQwfQ.eX0hUfHg5CJa2I6pkgRMXOLJL1jWfAAp4KnkwxU9fRo",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "mutation {\n  followUser(\n        email: \"dani4@email.net\"\n    ){\n    success\n    errors\n    follow{\n        user{\n            email\n        }\n        follower{\n            email\n        }\n        status\n    }\n  }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/graphql/?Content-Type=application/graphql&Authorization=Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImRhbmk0IiwiZXhwIjoxNjQzODI1MjQwLCJvcmlnSWF0IjoxNjQzODI0OTQwfQ.eX0hUfHg5CJa2I6pkgRMXOLJL1jWfAAp4KnkwxU9fRo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"graphql",
+						""
+					],
+					"query": [
+						{
+							"key": "Content-Type",
+							"value": "application/graphql"
+						},
+						{
+							"key": "Authorization",
+							"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImRhbmk0IiwiZXhwIjoxNjQzODI1MjQwLCJvcmlnSWF0IjoxNjQzODI0OTQwfQ.eX0hUfHg5CJa2I6pkgRMXOLJL1jWfAAp4KnkwxU9fRo"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Follow Requests",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/graphql",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImRhbmkyIiwiZXhwIjoxNjQzNzQ4MDM0LCJvcmlnSWF0IjoxNjQzNzQ3NzM0fQ.9u3ozc883yv2z9xxi_9ZaroxrbN6W-C4reu7OFONU10",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "query {\n  listFollowRequests{\n      id\n      user{\n          username\n      }\n      follower{\n          username\n      }\n  }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/graphql/?Content-Type=application/graphql&Authorization=Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImRhbmk0IiwiZXhwIjoxNjQzODI1MjQwLCJvcmlnSWF0IjoxNjQzODI0OTQwfQ.eX0hUfHg5CJa2I6pkgRMXOLJL1jWfAAp4KnkwxU9fRo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"graphql",
+						""
+					],
+					"query": [
+						{
+							"key": "Content-Type",
+							"value": "application/graphql"
+						},
+						{
+							"key": "Authorization",
+							"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImRhbmk0IiwiZXhwIjoxNjQzODI1MjQwLCJvcmlnSWF0IjoxNjQzODI0OTQwfQ.eX0hUfHg5CJa2I6pkgRMXOLJL1jWfAAp4KnkwxU9fRo"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Accept or reject Follow request",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/graphql",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImRhbmkyIiwiZXhwIjoxNjQzNzQ4MDM0LCJvcmlnSWF0IjoxNjQzNzQ3NzM0fQ.9u3ozc883yv2z9xxi_9ZaroxrbN6W-C4reu7OFONU10",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "mutation {\n  changeFollowStatus(\n        id: 4,\n        action: \"refuse\"\n    ){\n    success\n    errors\n    follow{\n        user{\n            email\n        }\n        follower{\n            email\n        }\n        status\n    }\n  }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/graphql/?Content-Type=application/graphql&Authorization=Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImRhbmkiLCJleHAiOjE2NDM3NDE0MTAsIm9yaWdJYXQiOjE2NDM3NDExMTB9.ONLjFWMEAuiY53E-WwFj8dq2QXMZMMpYrkx5KcWSQas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"graphql",
+						""
+					],
+					"query": [
+						{
+							"key": "Content-Type",
+							"value": "application/graphql"
+						},
+						{
+							"key": "Authorization",
+							"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImRhbmkiLCJleHAiOjE2NDM3NDE0MTAsIm9yaWdJYXQiOjE2NDM3NDExMTB9.ONLjFWMEAuiY53E-WwFj8dq2QXMZMMpYrkx5KcWSQas"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Followed",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/graphql",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImRhbmkzIiwiZXhwIjoxNjQzNjY4NDAyLCJvcmlnSWF0IjoxNjQzNjY4MTAyfQ.4pQMr-tsHPBUi2WV6-xnAuucGWhV1gWiZcyPMGyeQz0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "query {\n  listFollowed{\n      id\n      username\n  }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/graphql/?Content-Type=application/graphql&Authorization=Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImRhbmkzIiwiZXhwIjoxNjQzNzQxNzIyLCJvcmlnSWF0IjoxNjQzNzQxNDIyfQ.AkDVhQCBTrdb-EQeCuDk2jd8gGXQv1458_1NewVA4as",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"graphql",
+						""
+					],
+					"query": [
+						{
+							"key": "Content-Type",
+							"value": "application/graphql"
+						},
+						{
+							"key": "Authorization",
+							"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImRhbmkzIiwiZXhwIjoxNjQzNzQxNzIyLCJvcmlnSWF0IjoxNjQzNzQxNDIyfQ.AkDVhQCBTrdb-EQeCuDk2jd8gGXQv1458_1NewVA4as"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Followers",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/graphql",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImRhbmkiLCJleHAiOjE2NDM3NDgyNTAsIm9yaWdJYXQiOjE2NDM3NDc5NTB9.TnIKZtXkaACDVVdOWQveoD2hSxb-lgX1WdiOSLXh3kk",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "query {\n  listFollowers{\n      id\n      username\n  }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/graphql/?Content-Type=application/graphql&Authorization=Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImRhbmkiLCJleHAiOjE2NDM3NDE0MTAsIm9yaWdJYXQiOjE2NDM3NDExMTB9.ONLjFWMEAuiY53E-WwFj8dq2QXMZMMpYrkx5KcWSQas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"graphql",
+						""
+					],
+					"query": [
+						{
+							"key": "Content-Type",
+							"value": "application/graphql"
+						},
+						{
+							"key": "Authorization",
+							"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImRhbmkiLCJleHAiOjE2NDM3NDE0MTAsIm9yaWdJYXQiOjE2NDM3NDExMTB9.ONLjFWMEAuiY53E-WwFj8dq2QXMZMMpYrkx5KcWSQas"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Unfollow user",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/graphql",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImRhbmkzIiwiZXhwIjoxNjQzNjY0MTI1LCJvcmlnSWF0IjoxNjQzNjYzODI1fQ.e0egL1Jj2EKyfm8dbozS1xLI5vlMYSfQRHv1OO0tvBM",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "mutation {\n  unfollowUser(\n        email: \"dani2@email.net\"\n    ){\n    success\n    errors\n  }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/graphql/?Content-Type=application/graphql&Authorization=Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImRhbmkyIiwiZXhwIjoxNjQzNzM3MzIzLCJvcmlnSWF0IjoxNjQzNzM3MDIzfQ.HU0qav2Mb8Q3-o1INkhR_z2AaFd_RgooD48RtXoeNVU",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"graphql",
+						""
+					],
+					"query": [
+						{
+							"key": "Content-Type",
+							"value": "application/graphql"
+						},
+						{
+							"key": "Authorization",
+							"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImRhbmkyIiwiZXhwIjoxNjQzNzM3MzIzLCJvcmlnSWF0IjoxNjQzNzM3MDIzfQ.HU0qav2Mb8Q3-o1INkhR_z2AaFd_RgooD48RtXoeNVU"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Follower",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/graphql",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImRhbmkiLCJleHAiOjE2NDM3NDgzNzcsIm9yaWdJYXQiOjE2NDM3NDgwNzd9.pGSGP1CbfKCGtja__0sWpRMJSEPjxd8ijv-0-EObBSc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "mutation {\n  deleteFollower(\n        email: \"dani3@email.net\"\n    ){\n    success\n    errors\n  }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/graphql/?Content-Type=application/graphql&Authorization=Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImRhbmkyIiwiZXhwIjoxNjQzNzM3MzIzLCJvcmlnSWF0IjoxNjQzNzM3MDIzfQ.HU0qav2Mb8Q3-o1INkhR_z2AaFd_RgooD48RtXoeNVU",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"graphql",
+						""
+					],
+					"query": [
+						{
+							"key": "Content-Type",
+							"value": "application/graphql"
+						},
+						{
+							"key": "Authorization",
+							"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImRhbmkyIiwiZXhwIjoxNjQzNzM3MzIzLCJvcmlnSWF0IjoxNjQzNzM3MDIzfQ.HU0qav2Mb8Q3-o1INkhR_z2AaFd_RgooD48RtXoeNVU"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Users",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/graphql",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImRhbmkiLCJleHAiOjE2NDM3NDgzNzcsIm9yaWdJYXQiOjE2NDM3NDgwNzd9.pGSGP1CbfKCGtja__0sWpRMJSEPjxd8ijv-0-EObBSc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "query {\n  searchUsers(\n        username: \"ni\"\n    ){\n        id\n        username\n    }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/graphql/?Content-Type=application/graphql&Authorization=Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImRhbmkyIiwiZXhwIjoxNjQzNzM3MzIzLCJvcmlnSWF0IjoxNjQzNzM3MDIzfQ.HU0qav2Mb8Q3-o1INkhR_z2AaFd_RgooD48RtXoeNVU",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"graphql",
+						""
+					],
+					"query": [
+						{
+							"key": "Content-Type",
+							"value": "application/graphql"
+						},
+						{
+							"key": "Authorization",
+							"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImRhbmkyIiwiZXhwIjoxNjQzNzM3MzIzLCJvcmlnSWF0IjoxNjQzNzM3MDIzfQ.HU0qav2Mb8Q3-o1INkhR_z2AaFd_RgooD48RtXoeNVU"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List User Ideas",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/graphql",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImRhbmkzIiwiZXhwIjoxNjQzODI1NTkzLCJvcmlnSWF0IjoxNjQzODI1MjkzfQ.z4EgSTe70bmoHz7I690aQEHwn-vQL8YZG25vFIPosCs",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "query {\n  listUserIdeas(\n        email: \"dani2@email.net\"\n    ){\n        id\n        user{\n            username\n        }\n        text\n        visibility\n    }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/graphql/?Content-Type=application/graphql&Authorization=Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImRhbmk0IiwiZXhwIjoxNjQzODI1MjQwLCJvcmlnSWF0IjoxNjQzODI0OTQwfQ.eX0hUfHg5CJa2I6pkgRMXOLJL1jWfAAp4KnkwxU9fRo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"graphql",
+						""
+					],
+					"query": [
+						{
+							"key": "Content-Type",
+							"value": "application/graphql"
+						},
+						{
+							"key": "Authorization",
+							"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImRhbmk0IiwiZXhwIjoxNjQzODI1MjQwLCJvcmlnSWF0IjoxNjQzODI0OTQwfQ.eX0hUfHg5CJa2I6pkgRMXOLJL1jWfAAp4KnkwxU9fRo"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Timeline",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/graphql",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImRhbmkzIiwiZXhwIjoxNjQzODI1NTkzLCJvcmlnSWF0IjoxNjQzODI1MjkzfQ.z4EgSTe70bmoHz7I690aQEHwn-vQL8YZG25vFIPosCs",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "query {\n  timeline{\n        id\n        user{\n            username\n        }\n        text\n        visibility\n    }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/graphql/?Content-Type=application/graphql&Authorization=Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImRhbmk0IiwiZXhwIjoxNjQzODI1MjQwLCJvcmlnSWF0IjoxNjQzODI0OTQwfQ.eX0hUfHg5CJa2I6pkgRMXOLJL1jWfAAp4KnkwxU9fRo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"graphql",
+						""
+					],
+					"query": [
+						{
+							"key": "Content-Type",
+							"value": "application/graphql"
+						},
+						{
+							"key": "Authorization",
+							"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImRhbmk0IiwiZXhwIjoxNjQzODI1MjQwLCJvcmlnSWF0IjoxNjQzODI0OTQwfQ.eX0hUfHg5CJa2I6pkgRMXOLJL1jWfAAp4KnkwxU9fRo"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
